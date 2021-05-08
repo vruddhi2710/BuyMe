@@ -1,0 +1,38 @@
+<%- include('../_layouts/adminheader') %>
+<header>
+    <h2 class="page-title">Edit a category</h2>
+</header>
+
+<a href="/admin/categories" class="btn btn-primary">Back to all categories</a>
+<br><br>
+<script>
+async function onBtnClick()
+{
+          fetch('/admin/categories/update-category/<%= id %>', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          redirect: 'follow',
+          body: JSON.stringify({
+           title: document.forms[0].elements[1].value
+          })
+          .then(response => response.json())
+          .then(data => {
+           console.log('Success:', data);
+           })
+        })
+}
+</script>
+<form method="POST" action="/admin/categories/update-category/<%= id %>?_method=PUT">
+  
+    <input type="hidden" class="form-control" name="id" value="<%= id %>" placeholder="">
+    <section class="form-group">
+        <label for="">Title</label>
+        <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+    </section>
+
+   
+    <button type="submit" class="btn btn-default" id="update-btn-category">Submit</button>
+</form>
+
+
+<%- include('../_layouts/adminfooter') %>
