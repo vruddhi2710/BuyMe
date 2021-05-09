@@ -156,7 +156,9 @@ app.use('/products', products);
 app.use('/cart', cart);
 app.use('/users', users);
 app.use('/', pages);
-
+app.get('/',(req,res)=>{
+    res.send('Welcome to BuyME');
+})
 // Start the server
 var port = 3000;
 app.listen(port, function () {
